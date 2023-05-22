@@ -37,6 +37,21 @@
     animation: clouds-animation 20s infinite linear;
 }
 
+.game-over {
+    filter: grayscale(100%);
+  }
+
+  .game-over-title{
+    font-size: 100px;
+    position: absolute;
+    /* margin: 10% 0% 0 0; */
+    left: 35%;
+    top: 32%;
+    color: red;
+}
+  
+  
+
 @keyframes pipe-animation {
     from {
         right: -80px;
