@@ -29,10 +29,23 @@ const loop = setInterval(() => {
         mario.style.width = '75px'
         mario.style.marginLeft = '50px'
 
+
+        const gameOverTitle = document.createElement('h1');
+        gameOverTitle.textContent = 'Game Over';
+        gameBoard.insertAdjacentElement('afterend', gameOverTitle)
+        
         clearInterval(loop)
 
     }
 }, 10)
 
+
+function alterarBackground() {
+    var gameBoard = document.querySelector('.game-board');
+    gameBoard.style.background = 'linear-gradient(#022938, #000000)';
+  }
+  
+  setTimeout(alterarBackground, 5000);
+  
 
 document.addEventListener('keydown', jump)
