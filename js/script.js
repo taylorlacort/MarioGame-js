@@ -10,8 +10,8 @@ function initMusic() {
     musicGameLoop.volume = 0.5; // Ajuste o volume desejado (entre 0 e 1)
     musicGameLoop.loop = true; // Habilita o loop contínuo do áudio
     musicGameLoop.play(); // Inicia o áudio
-  }
-  
+}
+
 
 const jump = () => {
     mario.classList.add('jump');
@@ -54,14 +54,22 @@ const loop = setInterval(() => {
         gameBoard.appendChild(gameOverTitle);
 
         gameOverSound.play(); // Reproduzindo o som de game over
-    } else {
-        setTimeout(initMusic(), 1000);
+        musicGameLoop.pause()
     }
 }, 10);
 
 function alterarBackground() {
     var gameBoard = document.querySelector('.game-board');
-    gameBoard.style.background = 'linear-gradient(#022938, #000000)';
+    gameBoard.style.background = 'linear-gradient(#053447, #02161f)';
 }
 
+function alterarBackground2() {
+    var gameBoard = document.querySelector('.game-board');
+    gameBoard.style.background = 'linear-gradient(#87ceeb, #e0f6ff)';
+}
+
+setTimeout(alterarBackground, 10000)
+setTimeout(alterarBackground2, 20000)
+
+setTimeout(initMusic, 500)
 document.addEventListener('keydown', jump);
