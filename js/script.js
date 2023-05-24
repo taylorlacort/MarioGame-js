@@ -1,7 +1,7 @@
 const mario = document.querySelector('.mario');
 const pipe = document.querySelector('.pipe');
 const jumpSound = new Audio('./sounds/smb_jump-small.mp3'); // Caminho para o arquivo de som do pulo
-const gameOverSound = new Audio('./sounds/smb_mariodie.mp3'); // Caminho para o arquivo de som de game over
+const gameOverSound = new Audio('./sounds/musica-de-sigma-estourado.mp3'); // Caminho para o arquivo de som de game over
 const musicGameLoop = new Audio("./sounds/Super-Mario.mp3");
 
 
