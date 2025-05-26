@@ -4,7 +4,39 @@ const jumpSound = new Audio('./sounds/smb_jump-small.mp3'); // Caminho para o ar
 const gameOverSound = new Audio('./sounds/musica-de-sigma-estourado.mp3'); // Caminho para o arquivo de som de game over
 const musicGameLoop = new Audio("./sounds/Super-Mario.mp3");
 
+let distance = 0;
+let isGameOver = false;
 
+// Criação do placar
+const scoreBoard = document.createElement('div');
+scoreBoard.classList.add('score-board');
+scoreBoard.textContent = 'Distância: 0m';
+document.querySelector('.game-board').appendChild(scoreBoard);
+
+function updateScore() {
+    if (!isGameOver) {
+        distance += 1;
+        scoreBoard.textContent = `Distância: ${distance}m`;
+    }
+}
+
+// Troca de cenários por distância
+function updateBackgroundByDistance() {
+    const gameBoard = document.querySelector('.game-board');
+    if (distance >= 0 && distance < 200) {
+        // Primeiro cenário (padrão)
+        gameBoard.style.background = 'linear-gradient(#87ceeb, #e0f6ff)';
+    } else if (distance >= 200 && distance < 400) {
+        // Segundo cenário (noite)
+        gameBoard.style.background = 'linear-gradient(#053447, #02161f)';
+    } else if (distance >= 400 && distance < 600) {
+        // Terceiro cenário (espaço)
+        gameBoard.style.background = 'linear-gradient(#1a0033, #0a0a23)';
+    } else if (distance >= 600) {
+        // Quarto cenário (pós-apocalíptico)
+        gameBoard.style.background = 'linear-gradient(#3e3e3e, #1a1a1a)';
+    }
+}
 
 function initMusic() {
     musicGameLoop.volume = 0.5; // Ajuste o volume desejado (entre 0 e 1)
@@ -22,6 +54,11 @@ const jump = () => {
         mario.classList.remove('jump');
     }, 500);
 };
+
+const scoreInterval = setInterval(() => {
+    updateScore();
+    updateBackgroundByDistance();
+}, 50);
 
 const loop = setInterval(() => {
     const pipe = document.querySelector('.pipe');
@@ -43,33 +80,37 @@ const loop = setInterval(() => {
         mario.style.marginLeft = '50px';
 
         clearInterval(loop);
+        clearInterval(scoreInterval);
+        isGameOver = true;
 
         // Adicionando a classe "game-over" ao elemento mario
         mario.classList.add('game-over');
 
-        // Adicionando o título "Game Over" após o elemento .game-board
+        // Cria um container para alinhar Game Over e a pontuação
+        const gameOverContainer = document.createElement('div');
+        gameOverContainer.classList.add('game-over-container');
+
+        // Título Game Over
         const gameOverTitle = document.createElement('h1');
         gameOverTitle.textContent = 'Game Over';
         gameOverTitle.classList.add('game-over-title');
-        gameBoard.appendChild(gameOverTitle);
+
+        // Pontuação final
+        const finalScore = document.createElement('h2');
+        finalScore.textContent = `Distância final: ${distance}m`;
+        finalScore.classList.add('final-score');
+
+        // Adiciona ambos ao container
+        gameOverContainer.appendChild(gameOverTitle);
+        gameOverContainer.appendChild(finalScore);
+
+        // Adiciona o container ao gameBoard
+        gameBoard.appendChild(gameOverContainer);
 
         gameOverSound.play(); // Reproduzindo o som de game over
         musicGameLoop.pause()
     }
 }, 10);
-
-function alterarBackground() {
-    var gameBoard = document.querySelector('.game-board');
-    gameBoard.style.background = 'linear-gradient(#053447, #02161f)';
-}
-
-function alterarBackground2() {
-    var gameBoard = document.querySelector('.game-board');
-    gameBoard.style.background = 'linear-gradient(#87ceeb, #e0f6ff)';
-}
-
-setTimeout(alterarBackground, 10000)
-setTimeout(alterarBackground2, 20000)
 
 setTimeout(initMusic, 500)
 document.addEventListener('keydown', jump);

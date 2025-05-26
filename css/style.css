@@ -39,18 +39,53 @@
 
 .game-over {
     filter: grayscale(100%);
-  }
-
-  .game-over-title{
-    font-size: 100px;
-    position: absolute;
-    /* margin: 10% 0% 0 0; */
-    left: 35%;
-    top: 32%;
-    color: red;
 }
-  
-  
+
+.game-over-container {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    transform: translate(-50%, 0);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 30;
+    width: 100%;
+    pointer-events: none;
+}
+
+.game-over-title {
+    font-size: 100px;
+    color: red;
+    margin-bottom: 10px;
+    position: static;
+    left: unset;
+    top: unset;
+}
+
+.score-board {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+    z-index: 10;
+    font-family: 'Arial Black', Arial, sans-serif;
+}
+
+.final-score {
+    font-size: 2.5rem;
+    color: yellow;
+    text-shadow: 2px 2px 8px #000;
+    z-index: 20;
+    font-family: 'Arial Black', Arial, sans-serif;
+    position: static;
+    left: unset;
+    top: unset;
+}
+
+/* ...existing code... */
 
 @keyframes pipe-animation {
     from {
