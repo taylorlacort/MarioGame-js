@@ -114,3 +114,7 @@ const loop = setInterval(() => {
 
 setTimeout(initMusic, 500)
 document.addEventListener('keydown', jump);
+document.addEventListener('touchstart', function (e) {
+    // Evita múltiplos toques simultâneos
+    if (!isGameOver) jump();
+}, { passive: true });
